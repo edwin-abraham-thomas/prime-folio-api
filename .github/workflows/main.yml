@@ -28,6 +28,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore
       
   deploy:
+    if: github.event_name == 'push'
     needs: build
     runs-on: ubuntu-latest
     strategy:
