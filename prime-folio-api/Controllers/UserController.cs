@@ -31,9 +31,16 @@ namespace Controllers
         [Route("{userId}")]
         public async Task<ActionResult<User?>> GetAsync([FromRoute] string userId, CancellationToken cancellationToken)
         {
-            var response = await _userService.GetUserAsync(userId, cancellationToken);
+            //var response = await _userService.GetUserAsync(userId, cancellationToken);
 
-            return ResultMapper.ConvertToActionResult(response);
+            //return ResultMapper.ConvertToActionResult(response);
+            return Ok(new User
+            {
+                _id = userId,
+                FirstName = userId,
+                LastName = userId,
+                Email = userId,
+            });
         }
 
         [HttpPut]
