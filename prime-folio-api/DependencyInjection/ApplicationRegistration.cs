@@ -20,6 +20,7 @@ public static class ApplicationRegistration
 
         //Services
         services.AddTransient<IUserService, UserService>();
+        services.AddTransient<IContentService, ContentService>();
 
         //Repositories
         services.AddTransient<IUserRepository, UserRepository>();
