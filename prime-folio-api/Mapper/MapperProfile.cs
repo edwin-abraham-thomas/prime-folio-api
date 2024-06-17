@@ -7,6 +7,8 @@ namespace Mapper
     {
         public MapperProfile()
         {
+            //User Maps
+
             CreateMap<Models.User, entities.User>()
                 .ReverseMap();
 
@@ -22,6 +24,17 @@ namespace Mapper
                 .ReverseMap();
 
             CreateMap<UserUpdateRequest, Models.User>()
+                .ReverseMap();
+
+            //Content Maps
+
+            CreateMap<Models.Content, entities.Content>()
+                .ReverseMap();
+            CreateMap<Models.Dimension, entities.Dimension>()
+                .ReverseMap();
+            CreateMap<Models.Tile, entities.Tile>()
+                .ReverseMap();
+            CreateMap<Models.TileContent, entities.TileContent>()
                 .ReverseMap();
         }
     }
