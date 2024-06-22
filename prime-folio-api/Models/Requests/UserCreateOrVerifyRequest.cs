@@ -2,7 +2,7 @@
 
 namespace Models.Requests;
 
-public class UserCreateRequest
+public class UserCreateOrVerifyRequest
 {
     [Required]
     public string UserId { get; set; }
@@ -15,5 +15,6 @@ public class UserCreateRequest
     [Required]
     [EmailAddress]
     public string Email { get; set; }
-        public string Phone { get; set; }
+
+    public string Phone { get; set; }
 }

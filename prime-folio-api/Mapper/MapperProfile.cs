@@ -17,6 +17,7 @@ namespace Mapper
                 .ReverseMap();
 
             CreateMap<UserCreateRequest, Models.User>()
+                .ForMember(dest => dest._id, opt => opt.MapFrom(src => src.UserId))
                 .ReverseMap();
 
             CreateMap<UserUpdateRequest, entities.User>()
@@ -24,6 +25,9 @@ namespace Mapper
                 .ReverseMap();
 
             CreateMap<UserUpdateRequest, Models.User>()
+                .ReverseMap();
+
+            CreateMap<UserCreateOrVerifyRequest, UserCreateRequest>()
                 .ReverseMap();
 
             //Content Maps
