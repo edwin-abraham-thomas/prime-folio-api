@@ -5,6 +5,7 @@ using Interfaces.Repositories;
 using Interfaces.Services;
 using Models;
 using Models.Requests;
+using Models.Responses;
 
 namespace Services
 {
@@ -33,6 +34,37 @@ namespace Services
             catch (Exception ex)
             {
                 return Response<User?>.Failure(ex.Message, Constants.CommonErrorCodes.INTERNAL, ex);
+            }
+        }
+        public async Task<Response<UserCreateOrVerifyResponse>> CreateOrVerifyUserAsync(UserCreateOrVerifyRequest request, CancellationToken cancellationToken)
+        {
+            var userExisting = await this.GetUserAsync(request.UserId, cancellationToken);
+
+            if (userExisting.Result != null)
+            {
+                return Response<UserCreateOrVerifyResponse>.Success(new UserCreateOrVerifyResponse
+                {
+                    IsCreated = false,
+                    IsPrimeFolioVerified = true,
+                    User = userExisting.Result
+                });
+            }
+            else
+            {
+                var insertRequest = _mapper.Map<UserCreateRequest>(request);
+                var insertUserResponse = await this.InsertUserAsync(insertRequest, cancellationToken);
+
+                if (!insertUserResponse.IsSuccess)
+                {
+                    return Response<UserCreateOrVerifyResponse>.Failure(insertUserResponse.Error);
+                }
+
+                return Response<UserCreateOrVerifyResponse>.Success(new UserCreateOrVerifyResponse
+                {
+                    IsCreated = true,
+                    IsPrimeFolioVerified = true,
+                    User = insertUserResponse.Result
+                });
             }
         }
 
@@ -68,5 +100,6 @@ namespace Services
 
             return Response<bool>.Success(response);
         }
+
     }
 }

@@ -3,6 +3,7 @@ using Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Models.Requests;
+using Models.Responses;
 
 namespace Controllers;
 
@@ -23,6 +24,15 @@ public class UserController : ControllerBase
     public async Task<ActionResult<User?>> PostAsync([FromBody] UserCreateRequest request, CancellationToken cancellationToken)
     {
         var response = await _userService.InsertUserAsync(request, cancellationToken);
+
+        return ResultMapper.ConvertToActionResult(response);
+    }
+
+    [HttpPost]
+    [Route("CreateOrVerifyUser")]
+    public async Task<ActionResult<UserCreateOrVerifyResponse>> CreateOrVerifyUserAsync([FromBody] UserCreateOrVerifyRequest request, CancellationToken cancellationToken)
+    {
+        var response = await _userService.CreateOrVerifyUserAsync(request, cancellationToken);
 
         return ResultMapper.ConvertToActionResult(response);
     }

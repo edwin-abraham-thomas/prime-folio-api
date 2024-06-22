@@ -42,6 +42,15 @@ namespace core.Models
             };
         }
 
+        public static Response<T> Failure(Error error)
+        {
+            return new Response<T>
+            {
+                IsSuccess = false,
+                Error = error
+            };
+        }
+
         public static Response<bool> BoolResponse(bool success, string errorMessage = null, string errorCode = null, Exception exception = null)
         {
             return new Response<bool>
