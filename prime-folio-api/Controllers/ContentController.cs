@@ -20,6 +20,13 @@ public class ContentController : ControllerBase
         _logger = logger;
     }
 
+    [HttpPost]
+    public async Task<ActionResult<Models.Content>> PostAsync([FromBody] ContentCreateRequest request, CancellationToken cancellationToken)
+    {
+        var response = await _contentService.CreateContentAsync(request, cancellationToken);
+        return ResultMapper.ConvertToActionResult(response);
+    }
+
     [HttpGet]
     [Route("{userId}")]
     public async Task<ActionResult<Models.Content>> GetAsync([FromRoute] string userId, CancellationToken cancellationToken)
@@ -32,6 +39,14 @@ public class ContentController : ControllerBase
     public async Task<ActionResult<Models.Content>> PutAsync([FromBody] ContentUpdateRequest request, CancellationToken cancellationToken)
     {
         var response = await _contentService.UpdateContentAsync(request, cancellationToken);
+        return ResultMapper.ConvertToActionResult(response);
+    }
+
+    [HttpDelete]
+    [Route("{userId}")]
+    public async Task<ActionResult<bool>> DeleteAsync([FromRoute] string userId, CancellationToken cancellationToken)
+    {
+        var response = await _contentService.DeleteContentAsync(userId, cancellationToken);
         return ResultMapper.ConvertToActionResult(response);
     }
 }

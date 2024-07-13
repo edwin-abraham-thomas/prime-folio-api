@@ -3,7 +3,7 @@ using entities;
 
 namespace Interfaces.Repositories
 {
-    public interface IUserRepository : IBaseMongoRepository<User>
+    public interface IContentRepository : IBaseMongoRepository<Content>
     {
     }
 }

@@ -27,7 +27,7 @@ namespace Services
             var userEntity = _mapper.Map<entities.User>(user);
             try
             {
-                await _userRepository.InsertUserAsync(userEntity, cancellationToken);
+                await _userRepository.InsertAsync(userEntity, cancellationToken);
 
                 return Response<User?>.Success(_mapper.Map<User>(user));
             }
@@ -70,21 +70,21 @@ namespace Services
 
         public async Task<Response<User?>> UpdateUserAsync(UserUpdateRequest user, CancellationToken cancellationToken)
         {
-            var existingUser = await _userRepository.GetUserAsync(user.UserId, cancellationToken);
+            var existingUser = await _userRepository.GetAsync(user.UserId, cancellationToken);
             if (existingUser == null)
             {
                 return Response<User?>.Failure("Requested user not found", Constants.CommonErrorCodes.NOT_FOUND);
             }
 
             var updateRequest = _mapper.Map<entities.User>(user);
-            var updateResponse = await _userRepository.UpdateUserAsync(updateRequest, cancellationToken);
+            var updateResponse = await _userRepository.UpdateAsync(updateRequest, cancellationToken);
 
             return Response<User?>.Success(_mapper.Map<User>(updateResponse));
         }
 
         public async Task<Response<User?>> GetUserAsync(string userId, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.GetUserAsync(userId, cancellationToken);
+            var user = await _userRepository.GetAsync(userId, cancellationToken);
 
             if (user == null)
             {
@@ -96,7 +96,7 @@ namespace Services
 
         public async Task<Response<bool>> DeleteUserAsync(string userId, CancellationToken cancellationToken)
         {
-            var response = await _userRepository.DeleteUserAsync(userId, cancellationToken);
+            var response = await _userRepository.DeleteAsync(userId, cancellationToken);
 
             return Response<bool>.Success(response);
         }

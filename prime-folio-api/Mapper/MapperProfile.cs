@@ -40,6 +40,12 @@ namespace Mapper
                 .ReverseMap();
             CreateMap<Models.TileContent, entities.TileContent>()
                 .ReverseMap();
+
+            CreateMap<ContentCreateRequest, entities.Content>();
+            CreateMap<ContentCreateRequest, Models.Content>();
+
+            CreateMap<ContentUpdateRequest, entities.Content>();
+            CreateMap<entities.Content, Models.Content>();
         }
     }
 }
