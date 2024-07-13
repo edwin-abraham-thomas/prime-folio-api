@@ -2,11 +2,8 @@
 
 namespace Models.Requests
 {
-    public class ContentUpdateRequest
+    public class ContentCreateRequest
     {
-        [Required]
-        public string _id { get; set; }
-
         [Required]
         public string UserId { get; set; }
         public Dimension Dimension { get; set; }

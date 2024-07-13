@@ -24,5 +24,6 @@ public static class ApplicationRegistration
 
         //Repositories
         services.AddTransient<IUserRepository, UserRepository>();
+        services.AddTransient<IContentRepository, ContentRepository>();
     }
 }
