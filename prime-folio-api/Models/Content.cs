@@ -16,8 +16,8 @@
 
     public class Dimension
     {
-        public int Rowspan { get; set; }
-        public int Colspan { get; set; }
+        public int RowSpan { get; set; }
+        public int ColSpan { get; set; }
     }
 
     public class TileContent
