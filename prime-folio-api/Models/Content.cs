@@ -29,7 +29,14 @@
 
     public enum ContentType
     {
-        header,
-        section
+        /// <summary>
+        /// Header
+        /// </summary>
+        header = 0,
+
+        /// <summary>
+        /// Section
+        /// </summary>
+        section = 1
     }
 }
